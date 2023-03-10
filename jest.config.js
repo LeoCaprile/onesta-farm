@@ -23,6 +23,7 @@ const customJestConfig = {
       '<rootDir>/test/mocks.ts',
     '\\.(css|less|scss|html)$': '<rootDir>/test/mocks.ts',
     '^@components/(.*)$': '<rootDir>/src/components/$1',
+    '^@UI/(.*)$': '<rootDir>/src/UI/$1',
     '^@pages/(.*)$': '<rootDir>/src/pages/$1',
     '^@hooks$': '<rootDir>/src/hooks',
     '^@interfaces$': '<rootDir>/src/interfaces',
