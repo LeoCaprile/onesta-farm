@@ -22,7 +22,8 @@
       "@interfaces/*": ["src/interfaces/*"],
       "@styles/*": ["src/styles/*"],
       "@pages/*": ["src/pages/*"],
-      "@public/*": ["src/public/*"]
+      "@public/*": ["src/public/*"],
+      "@UI/*": ["src/UI/*"]
     }
   },
   "include": ["next-env.d.ts", "types/**/*.ts", "**/*.ts", "**/*.tsx"],
