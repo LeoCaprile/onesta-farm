@@ -6,25 +6,39 @@ export interface ButtonProps {
   size?: 'normal' | 'large';
   icon?: ReactNode;
   disabled?: boolean;
+  loading?: boolean;
 }
 
-const Button = ({ children, size, type, disabled, icon }: ButtonProps) => {
+const Button = ({
+  children,
+  size,
+  type,
+  disabled,
+  icon,
+  loading,
+}: ButtonProps) => {
   function defineClassName() {
+    const disableButton = disabled;
+
     switch (type) {
       case 'primary':
-        if (disabled) return 'bg-[#E8E8E8] text-[#858585] ';
+        if (disableButton) return 'bg-[#E8E8E8] text-[#858585] ';
         return 'bg-[#034BE5] text-white ';
       case 'secondary':
-        if (disabled)
+        if (disableButton)
           return 'border-[#E8E8E8] dark:text-[#858585] border-[1px] bg-transparent text-[#858585] rounded-lg bg-transparent ';
         return 'border-[#034BE5] dark:text-white border-[1px] bg-transparent text-black rounded-lg bg-transparent ';
       case 'link':
-        if (disabled) return 'text-[#858585] bg-transparent underline ';
+        if (disableButton) return 'text-[#858585] bg-transparent underline ';
         return 'text-[#034BE5] bg-transparent underline ';
       default:
-        if (disabled) return 'bg-[#E8E8E8] text-[#858585] ';
+        if (disableButton) return 'bg-[#E8E8E8] text-[#858585] ';
         return 'bg-[#034BE5] text-white ';
     }
+  }
+
+  function onlyLoader() {
+    if (children) return 'mr-[10px]';
   }
 
   function defineSize() {
@@ -41,14 +55,32 @@ const Button = ({ children, size, type, disabled, icon }: ButtonProps) => {
         'font-bold rounded-[100px] ' + defineClassName() + defineSize()
       }
     >
-      {icon ? (
+      {loading && !icon && (
+        <div className="flex items-center justify-center">
+          <div
+            className={
+              'rounded-full border-b-transparent animate-spin border-white h-4 w-4 border-2 ' +
+              onlyLoader()
+            }
+          />
+          {children}
+        </div>
+      )}
+      {icon && (
         <div className="flex">
+          {loading && (
+            <div
+              className={
+                'rounded-full border-b-transparent animate-spin border-white h-4 w-4 border-2 ' +
+                onlyLoader()
+              }
+            />
+          )}
           <div className="mr-[10px]">{icon}</div>
           {children}
         </div>
-      ) : (
-        children
       )}
+      {children && !icon && !loading ? children : null}
     </button>
   );
 };
