@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 
-interface Props {
+export interface ButtonProps {
   children: ReactNode;
   type?: 'primary' | 'secondary' | 'link';
   size?: 'normal' | 'large';
@@ -8,7 +8,7 @@ interface Props {
   disabled?: boolean;
 }
 
-const Button = ({ children, size, type, disabled, icon }: Props) => {
+const Button = ({ children, size, type, disabled, icon }: ButtonProps) => {
   function defineClassName() {
     switch (type) {
       case 'primary':

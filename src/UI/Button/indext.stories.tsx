@@ -1,4 +1,5 @@
-import Button from '.';
+import Button, { ButtonProps } from '.';
+import { StoryFn } from '@storybook/react';
 
 export default {
   title: 'Button',
@@ -22,5 +23,7 @@ export default {
   },
 };
 
-const Template = (args: any) => <Button {...args}>Button</Button>;
+const Template: StoryFn<ButtonProps> = (args: ButtonProps) => (
+  <Button {...args}>Button</Button>
+);
 export const Primary = Template.bind({});
