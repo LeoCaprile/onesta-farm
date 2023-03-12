@@ -1,22 +1,16 @@
 import Card from '@UI/Card';
 import Container from '@UI/Container';
-import Head from 'next/head';
+import Layout from '@UI/Layout';
 import Image from 'next/image';
 import Link from 'next/link';
 
 export default function Home() {
   return (
-    <Container className="grid place-content-center h-screen">
-      <Head>
-        <title>Home ~ Onesta Farm</title>
-        <meta
-          name="description"
-          content="Onesta Farm the application for the farm"
-        />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <main>
+    <Layout
+      title="Home ~ Onesta Farm"
+      description="Onesta Farm App for your farm"
+    >
+      <Container className="grid place-content-center">
         <div className="flex flex-col items-center mb-5">
           <Image
             draggable={false}
@@ -52,7 +46,7 @@ export default function Home() {
             </Card>
           </Link>
         </div>
-      </main>
-    </Container>
+      </Container>
+    </Layout>
   );
 }
