@@ -27,7 +27,7 @@ const Button = ({
       case 'secondary':
         if (disableButton)
           return 'border-[#E8E8E8] dark:text-[#858585] border-[1px] bg-transparent text-[#858585] rounded-lg bg-transparent ';
-        return 'border-[#034BE5] dark:text-white border-[1px] bg-transparent text-black rounded-lg bg-transparent ';
+        return 'border-[#034BE5] border-[1px] bg-transparent text-black rounded-lg bg-transparent ';
       case 'link':
         if (disableButton) return 'text-[#858585] bg-transparent underline ';
         return 'text-[#034BE5] bg-transparent underline ';
