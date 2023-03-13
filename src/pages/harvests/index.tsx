@@ -73,6 +73,7 @@ export default function HarvestsPage({
       if (response.status === 200) {
         toast.success('Cosecha creada correctamente');
         toast.dismiss(toastId);
+        router.replace(router.asPath);
       }
     } catch (error) {
       toast.error('Ha ocurrido un error al crear la cosecha');
@@ -217,21 +218,15 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext) {
 
     const {
       data: { clients },
-    } = await OnestaApiInstance.get('/clients', {
-      params: { page: page || 1 },
-    });
+    } = await OnestaApiInstance.get('/clients');
 
     const {
       data: { commodities },
-    } = await OnestaApiInstance.get('/commodities', {
-      params: { page: page || 1 },
-    });
+    } = await OnestaApiInstance.get('/commodities');
 
     const {
       data: { growers },
-    } = await OnestaApiInstance.get('/growers', {
-      params: { page: page || 1 },
-    });
+    } = await OnestaApiInstance.get('/growers');
 
     return {
       props: {
