@@ -1,3 +1,4 @@
+import { StoryFn } from '@storybook/react';
 import Breadcrumb, { BreadcrumbProps } from '.';
 
 export default {
@@ -10,7 +11,9 @@ export default {
   },
 };
 
-const Template = (args: BreadcrumbProps) => <Breadcrumb {...args} />;
+const Template: StoryFn<BreadcrumbProps> = (args: BreadcrumbProps) => (
+  <Breadcrumb {...args} />
+);
 export const Breadcrum = Template.bind({});
 
 Breadcrum.args = {
