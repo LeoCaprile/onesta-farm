@@ -44,7 +44,7 @@ const Modal = ({ title, children, footer, open, setOpenModal }: ModalProps) => {
             {children}
           </div>
           {footer && (
-            <div className="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b ">
+            <div className="flex items-center justify-end p-6 space-x-2 border-t border-gray-200 rounded-b ">
               {footer}
             </div>
           )}
