@@ -33,13 +33,13 @@ export default function Home() {
               <h2 className="text-xl mt-2">Clientes</h2>
             </Card>
           </Link>
-          <Link href="/crops">
+          <Link href="/harvests">
             <Card className="flex flex-col items-center hover:scale-105 transition-transform">
               <Image width={100} height={100} src="/crops.png" alt="cliente" />
               <h2 className="text-xl mt-2">Cosechas</h2>
             </Card>
           </Link>
-          <Link href="/fruits">
+          <Link href="/commodities">
             <Card className="flex flex-col items-center hover:scale-105 transition-transform">
               <Image width={100} height={100} src="/fruits.png" alt="cliente" />
               <h2 className="text-xl mt-2">Frutas</h2>
