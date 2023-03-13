@@ -2,6 +2,7 @@ import { ReactNode } from 'react';
 
 export interface ButtonProps {
   children: ReactNode;
+  onClick?: () => void;
   type?: 'primary' | 'secondary' | 'link';
   size?: 'normal' | 'large';
   icon?: ReactNode;
@@ -16,6 +17,7 @@ const Button = ({
   disabled,
   icon,
   loading,
+  onClick,
 }: ButtonProps) => {
   function defineClassName() {
     const disableButton = disabled;
@@ -50,38 +52,41 @@ const Button = ({
     }
   }
   return (
-    <button
-      className={
-        'font-bold rounded-[100px] ' + defineClassName() + defineSize()
-      }
-    >
-      {loading && !icon && (
-        <div className="flex items-center justify-center">
-          <div
-            className={
-              'rounded-full border-b-transparent animate-spin border-white h-4 w-4 border-2 ' +
-              onlyLoader()
-            }
-          />
-          {children}
-        </div>
-      )}
-      {icon && (
-        <div className="flex">
-          {loading && (
+    <div>
+      <button
+        onClick={onClick}
+        className={
+          'font-bold rounded-[100px] ' + defineClassName() + defineSize()
+        }
+      >
+        {loading && !icon && (
+          <div className="flex items-center justify-center">
             <div
               className={
                 'rounded-full border-b-transparent animate-spin border-white h-4 w-4 border-2 ' +
                 onlyLoader()
               }
             />
-          )}
-          <div className="mr-[10px]">{icon}</div>
-          {children}
-        </div>
-      )}
-      {children && !icon && !loading ? children : null}
-    </button>
+            {children}
+          </div>
+        )}
+        {icon && (
+          <div className="flex">
+            {loading && (
+              <div
+                className={
+                  'rounded-full border-b-transparent animate-spin border-white h-4 w-4 border-2 ' +
+                  onlyLoader()
+                }
+              />
+            )}
+            <div className="mr-[10px]">{icon}</div>
+            {children}
+          </div>
+        )}
+        {children && !icon && !loading ? children : null}
+      </button>
+    </div>
   );
 };
 
