@@ -1,4 +1,4 @@
-import { Harvests } from '@interfaces/harvests';
+import { Harvests, HarvestsAdapted } from '@interfaces/harvests';
 import { StoryFn } from '@storybook/react';
 import Table, { TableProps } from '.';
 import { harvestsData } from './data';
@@ -8,7 +8,9 @@ export default {
   component: Table,
 };
 
-const Template: StoryFn<TableProps> = (args: TableProps) => <Table {...args} />;
+const Template: StoryFn<TableProps<HarvestsAdapted>> = (
+  args: TableProps<HarvestsAdapted>,
+) => <Table {...args} />;
 export const Default = Template.bind({});
 
 Default.args = {
@@ -35,7 +37,7 @@ Default.args = {
     },
   ],
   dataSource: harvestsData.map((harvest: Harvests) => ({
-    key: harvest.id,
+    id: harvest.id,
     grower: harvest.grower.name,
     commodity: harvest.commodity.name,
     variety: harvest.variety.name,
