@@ -22,7 +22,9 @@
     "next": "13.0.1",
     "nextjs-progressbar": "^0.0.16",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "react-hook-form": "^7.43.5",
+    "react-hot-toast": "^2.4.0"
   },
   "devDependencies": {
     "@storybook/addon-essentials": "^7.0.0-rc.1",
