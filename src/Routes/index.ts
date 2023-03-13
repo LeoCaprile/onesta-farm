@@ -1,8 +1,21 @@
 import { Route } from '@interfaces/route';
 
-export const routes: Array<Route> = [
+export const growersRoutes: Array<Route> = [
   {
-    path: '/farmers',
+    path: '/growers',
     name: 'Agricultores',
+  },
+];
+export const clientsRoutes: Array<Route> = [
+  {
+    path: '/clients',
+    name: 'Clientes',
+  },
+];
+
+export const commoditiesRoutes: Array<Route> = [
+  {
+    path: '/commodities',
+    name: 'Frutas',
   },
 ];

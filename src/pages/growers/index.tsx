@@ -7,13 +7,13 @@ import Layout from '@UI/Layout';
 import Modal from '@UI/Modal';
 import Pagination from '@UI/Pagination';
 import Table from '@UI/Table';
-import { Grower } from '@interfaces/farmers';
+import { Grower } from '@interfaces/growers';
 import { Farm } from '@interfaces/harvests';
 import { TableHeaders } from '@interfaces/table';
 import { GetServerSidePropsContext } from 'next';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
-import { routes } from 'src/Routes';
+import { growersRoutes } from 'src/Routes';
 import { OnestaApiInstance } from 'src/services';
 
 interface GrowersPageProps {
@@ -75,7 +75,7 @@ export default function GrowersPage({ growers, count }: GrowersPageProps) {
     >
       <Container className="p-12">
         <div>
-          <Breadcrumb routes={routes} />
+          <Breadcrumb routes={growersRoutes} />
           <div className="flex justify-between items-center">
             <h1 className="text-2xl font-bold my-6">Agricultores</h1>
           </div>
