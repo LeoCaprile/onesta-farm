@@ -22,7 +22,7 @@ export const commoditiesRoutes: Array<Route> = [
 
 export const harvestRoutes: Array<Route> = [
   {
-    path: '/commodities',
-    name: 'Frutas',
+    path: '/harvests',
+    name: 'Cosechas',
   },
 ];
