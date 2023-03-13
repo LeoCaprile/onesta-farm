@@ -11,7 +11,16 @@ const Pagination = ({ count, onChange, selectedPage }: PaginationProps) => {
 
   return (
     <div className="text-black flex gap-2 ">
-      <button className="w-7 h-7 rounded-[6px] hover:bg-[#E9F1FF] hover:text-[#034BE5] bg-[#FFFFFF] border-2 border-[#F9F9F9]">
+      <button
+        onClick={() => {
+          onChange(selectedPage - 1);
+        }}
+        className={`w-7 h-7 rounded-[6px]  border-2 border-[#F9F9F9] ${
+          selectedPage <= 1
+            ? 'bg-[#E8E8E8] text-[#858585]'
+            : 'hover:bg-[#E9F1FF] hover:text-[#034BE5] bg-[#FFFFFF]'
+        } }`}
+      >
         &lt;
       </button>
 
@@ -40,7 +49,16 @@ const Pagination = ({ count, onChange, selectedPage }: PaginationProps) => {
         );
       })}
 
-      <button className="w-7 h-7 rounded-[6px] hover:bg-[#E9F1FF] hover:text-[#034BE5] bg-[#FFFFFF] border-2 border-[#F9F9F9]">
+      <button
+        onClick={() => {
+          onChange(selectedPage + 1);
+        }}
+        className={`w-7 h-7 rounded-[6px]  border-2 border-[#F9F9F9] ${
+          selectedPage >= pages.length
+            ? 'bg-[#E8E8E8] text-[#858585]'
+            : 'hover:bg-[#E9F1FF] hover:text-[#034BE5] bg-[#FFFFFF]'
+        } }`}
+      >
         &gt;
       </button>
     </div>
