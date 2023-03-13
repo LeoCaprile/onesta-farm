@@ -1,4 +1,5 @@
 import { TableHeaders } from '@interfaces/table';
+import Image from 'next/image';
 import React from 'react';
 
 export interface TableProps<TableData> {
@@ -8,55 +9,65 @@ export interface TableProps<TableData> {
 
 function Table<TableData>({ dataSource, tableHeaders }: TableProps<TableData>) {
   return (
-    <table className="text-left table-auto text-black text-xs border-spacing-y-2 w-full border-separate">
-      <thead>
-        <tr className="font-thin py-2">
-          {tableHeaders.map((header) => (
-            <td
-              key={header.key}
-              className="px-3 py-2 first:rounded-l-full border-r-[1px] last:rounded-r-full border-white bg-[#E9F1FF]"
-            >
-              {header.name}
-            </td>
-          ))}
-        </tr>
-      </thead>
-
-      <tbody className="font-thin border-spacing-0">
-        {dataSource?.map((data) => (
-          <tr key={data.id} className="overflow-hidden shadow-md rounded-xl">
-            {Object.entries(data)?.map(([key, value]) => {
-              if (tableHeaders.some((header) => header.key === key)) {
-                if (
-                  tableHeaders.find((header) => header.key === key)?.render !==
-                  undefined
-                ) {
-                  return (
-                    <td
-                      key={key}
-                      className="px-3 py-2 first:rounded-l-full border-r-[1px] last:rounded-r-full border-white bg-white"
-                    >
-                      {tableHeaders
-                        .find((header) => header.key === key)
-                        ?.render?.(data, dataSource)}
-                    </td>
-                  );
-                } else {
-                  return (
-                    <td
-                      key={key}
-                      className="px-3 py-4 bg-white border-r-[1px] border-[#E8E8E8] first:rounded-l-xl last:rounded-r-xl"
-                    >
-                      {value}
-                    </td>
-                  );
-                }
-              }
-            })}
+    <>
+      <table className="text-left table-auto text-black text-xs border-spacing-y-2 w-full border-separate">
+        <thead>
+          <tr className="font-thin py-2">
+            {tableHeaders.map((header) => (
+              <td
+                key={header.key}
+                className="px-3 py-2 first:rounded-l-full border-r-[1px] last:rounded-r-full border-white bg-[#E9F1FF]"
+              >
+                {header.name}
+              </td>
+            ))}
           </tr>
-        ))}
-      </tbody>
-    </table>
+        </thead>
+
+        <tbody className="font-thin border-spacing-0">
+          {dataSource?.map((data) => (
+            <tr key={data.id} className="overflow-hidden shadow-md rounded-xl">
+              {Object.entries(data)?.map(([key, value]) => {
+                if (tableHeaders.some((header) => header.key === key)) {
+                  if (
+                    tableHeaders.find((header) => header.key === key)
+                      ?.render !== undefined
+                  ) {
+                    return (
+                      <td
+                        key={key}
+                        className="px-3 py-2 first:rounded-l-full border-r-[1px] last:rounded-r-full border-white bg-white"
+                      >
+                        {tableHeaders
+                          .find((header) => header.key === key)
+                          ?.render?.(data, dataSource)}
+                      </td>
+                    );
+                  } else {
+                    return (
+                      <td
+                        key={key}
+                        className="px-3 py-4 bg-white border-r-[1px] border-[#E8E8E8] first:rounded-l-xl last:rounded-r-xl"
+                      >
+                        {value}
+                      </td>
+                    );
+                  }
+                }
+              })}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      {dataSource.length <= 0 && (
+        <div className="flex flex-col justify-center items-center">
+          <h2 className="text-xl font-bold my-6">
+            No existen datos en la pagina seleccionada
+          </h2>
+          <Image width={100} height={100} src="/no_data.png" alt="No data" />
+        </div>
+      )}
+    </>
   );
 }
 
