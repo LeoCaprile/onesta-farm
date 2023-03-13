@@ -19,3 +19,10 @@ export const commoditiesRoutes: Array<Route> = [
     name: 'Frutas',
   },
 ];
+
+export const harvestRoutes: Array<Route> = [
+  {
+    path: '/commodities',
+    name: 'Frutas',
+  },
+];

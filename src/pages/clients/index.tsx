@@ -1,10 +1,12 @@
-import Breadcrumb from '@UI/Breadcrumb';
-import Card from '@UI/Card';
-import Container from '@UI/Container';
-import Divider from '@UI/Divider';
-import Layout from '@UI/Layout';
-import Pagination from '@UI/Pagination';
-import Table from '@UI/Table';
+import {
+  Breadcrumb,
+  Card,
+  Container,
+  Divider,
+  Pagination,
+  Layout,
+  Table,
+} from '@UI';
 import { Client } from '@interfaces/clients';
 import { TableHeaders } from '@interfaces/table';
 import { GetServerSidePropsContext } from 'next';
@@ -12,13 +14,13 @@ import { useRouter } from 'next/router';
 import { clientsRoutes } from 'src/Routes';
 import { OnestaApiInstance } from 'src/services';
 
-interface GrowersPageProps {
+interface ClientsPageProps {
   clients: Client[];
   count: number;
   error?: boolean;
 }
 
-export default function GrowersPage({ clients, count }: GrowersPageProps) {
+export default function ClientsPage({ clients, count }: ClientsPageProps) {
   const router = useRouter();
 
   const tableHeaders: Array<TableHeaders<Client>> = [
@@ -57,7 +59,7 @@ export default function GrowersPage({ clients, count }: GrowersPageProps) {
             <Pagination
               count={count}
               onChange={(selectedPage) => {
-                router.push(`/growers?page=${selectedPage}`);
+                router.push(`${router.pathname}?page=${selectedPage}`);
               }}
               selectedPage={Number(router.query?.page) || 1}
             />

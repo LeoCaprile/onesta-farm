@@ -9,84 +9,66 @@ import {
   Layout,
   Table,
 } from '@UI';
-import { Grower } from '@interfaces/growers';
-import { Farm } from '@interfaces/harvests';
+import { Harvests, HarvestsAdapted } from '@interfaces/harvests';
 import { TableHeaders } from '@interfaces/table';
 import { GetServerSidePropsContext } from 'next';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
-import { growersRoutes } from 'src/Routes';
+import { harvestRoutes } from 'src/Routes';
 import { OnestaApiInstance } from 'src/services';
 
-interface GrowersPageProps {
-  growers: Grower[];
+interface HarvestsPageProps {
+  harvests: HarvestsAdapted[];
   count: number;
   error?: boolean;
 }
 
-export default function GrowersPage({ growers, count }: GrowersPageProps) {
+export default function HarvestsPage({ harvests, count }: HarvestsPageProps) {
   const [openModal, setOpenModal] = useState<boolean>(false);
-  const [selectedFarmer, setSelectedFarmer] = useState<Grower>();
 
   const router = useRouter();
 
-  const tableHeaders: Array<TableHeaders<Grower>> = [
+  const tableHeaders: Array<TableHeaders<HarvestsAdapted>> = [
     {
-      key: 'name',
-      name: 'Nombre',
+      name: 'Agricultor',
+      key: 'grower',
     },
     {
-      key: 'lastName',
-      name: 'Apellido',
+      name: 'Fruta',
+      key: 'commodity',
     },
     {
-      key: 'email',
-      name: 'Correo',
+      name: 'Variedad',
+      key: 'variety',
     },
     {
-      key: 'farms',
-      name: 'Campos',
-      render: (row) => (
-        <Button
-          onClick={() => {
-            setSelectedFarmer(row);
-            setOpenModal(true);
-          }}
-        >
-          Ver Campos
-        </Button>
-      ),
-    },
-  ];
-
-  const farmsTableHeaders: Array<TableHeaders<Farm>> = [
-    {
-      key: 'name',
-      name: 'Nombre',
+      name: 'Campo',
+      key: 'farm',
     },
     {
-      key: 'address',
-      name: 'Dirección',
+      name: 'Cliente',
+      key: 'client',
     },
   ];
 
   return (
     <Layout
-      title="Agricultores ~ Onesta Farm"
+      title="Cosechas ~ Onesta Farm"
       description="Information about our farmers"
     >
       <Container className="p-12">
         <div>
-          <Breadcrumb routes={growersRoutes} />
+          <Breadcrumb routes={harvestRoutes} />
           <div className="flex justify-between items-center">
-            <h1 className="text-2xl font-bold my-6">Agricultores</h1>
+            <h1 className="text-2xl font-bold my-6">Cosechas</h1>
+            <Button icon="+">Agregar cosecha</Button>
           </div>
         </div>
 
         <Divider />
 
         <Card className="my-6 overflow-y-auto">
-          <Table dataSource={growers} tableHeaders={tableHeaders} />
+          <Table dataSource={harvests} tableHeaders={tableHeaders} />
           <div className="flex justify-end mt-2">
             <Pagination
               count={count}
@@ -101,14 +83,9 @@ export default function GrowersPage({ growers, count }: GrowersPageProps) {
         <Modal
           open={openModal}
           setOpenModal={setOpenModal}
-          title={
-            'Campos de ' + selectedFarmer?.name + ' ' + selectedFarmer?.lastName
-          }
+          title={'Campos de '}
         >
-          <Table
-            dataSource={selectedFarmer?.farms || []}
-            tableHeaders={farmsTableHeaders}
-          />
+          hola
         </Modal>
       </Container>
     </Layout>
@@ -120,21 +97,29 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext) {
 
   try {
     const {
-      data: { growers, count },
-    } = await OnestaApiInstance.get('/growers', {
+      data: { harvests, count },
+    } = await OnestaApiInstance.get('/harvests', {
       params: { page: page || 1 },
     });
 
     return {
       props: {
-        growers,
+        harvests: harvests.map((harvest: Harvests) => ({
+          id: harvest.id,
+          grower: harvest.grower.name,
+          commodity: harvest.commodity.name,
+          variety: harvest.variety.name,
+          farm: harvest.farm.name,
+          client: harvest.client.name,
+          createdAt: harvest.createdAt,
+        })),
         count,
       },
     };
   } catch (e) {
     return {
       props: {
-        growers: [],
+        harvests: [],
         count: 0,
         error: true,
       },
