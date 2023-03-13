@@ -4,15 +4,7 @@ export interface Farm {
   address: string;
 }
 
-export interface Farmer {
-  id: string;
-  name: string;
-  lastName: string;
-  email: string;
-  farms: Farm[];
-}
-
-export interface AdaptedFarmer {
+export interface Grower {
   id: string;
   name: string;
   lastName: string;

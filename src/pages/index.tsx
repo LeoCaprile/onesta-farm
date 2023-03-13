@@ -21,7 +21,7 @@ export default function Home() {
           />
         </div>
         <div className="grid grid-cols-2 gap-5">
-          <Link href="/farmers">
+          <Link href="/growers">
             <Card className="flex flex-col items-center hover:scale-105 transition-transform">
               <Image width={100} height={100} src="/farmer.png" alt="cliente" />
               <h2 className="text-xl mt-2">Agricultores</h2>
