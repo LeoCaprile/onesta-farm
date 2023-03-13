@@ -59,7 +59,7 @@ function Table<TableData>({ dataSource, tableHeaders }: TableProps<TableData>) {
           ))}
         </tbody>
       </table>
-      {dataSource.length <= 0 && (
+      {dataSource?.length <= 0 && (
         <div className="flex flex-col justify-center items-center">
           <h2 className="text-xl font-bold my-6">
             No existen datos en la pagina seleccionada
