@@ -8,6 +8,7 @@ export interface ButtonProps {
   icon?: ReactNode;
   disabled?: boolean;
   loading?: boolean;
+  htmlType?: 'button' | 'submit' | 'reset';
 }
 
 const Button = ({
@@ -18,6 +19,7 @@ const Button = ({
   icon,
   loading,
   onClick,
+  htmlType = 'button',
 }: ButtonProps) => {
   function defineClassName() {
     const disableButton = disabled;
@@ -54,7 +56,9 @@ const Button = ({
   return (
     <div>
       <button
+        type={htmlType}
         onClick={onClick}
+        disabled={disabled}
         className={
           'font-bold rounded-[100px] ' + defineClassName() + defineSize()
         }
